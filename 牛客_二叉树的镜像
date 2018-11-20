@@ -1,0 +1,27 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回镜像树的根节点
+    def Mirror(self, root):
+        # write code here
+        #递归地交换左右结点
+        if root == None:
+            return root
+        if root.left == None and root.right == None:
+            return root
+        else:
+            self.change_child(root)
+            self.Mirror(root.left)
+            self.Mirror(root.right)
+    def change_child(self,node):
+        if (node == None) or (node.left == None and node.right == None):
+            return node
+        else:
+            temp = node.left
+            node.left = node.right
+            node.right = temp
+            return node
