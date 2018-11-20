@@ -9,7 +9,7 @@ class Solution:
             temp_nor = num1 ^ num2
             temp_and = num1 & num2
             num2 = temp_and << 1
-            num1 = temp_nor & 0xFFFFFFFF  #这步想不到
+            num1 = temp_nor & 0xFFFFFFFF  #这步想不到,负数的处理。
         if num1 & 0x80000000:
             return num1-2**32
         else:
