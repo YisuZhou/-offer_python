@@ -1,0 +1,24 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def rectCover(self, number):
+        # write code here
+        # 如果第一块竖着放，则有f(n-1)种方法
+        # 如果第一块横着放，那下面肯定要有一块，所以有f(n-2)种方法
+        if number <= 0:
+            return 0
+        elif number <= 2:
+            return number
+        else:
+            return self.rectCover(number-1) + self.rectCover(number-2)
+ #================超时不通过，改成数组形式=============
+         if number <= 0:
+            return 0
+         else:
+            m = 1  # 对应0
+            n = 1  # 对应1
+            ans = 1 # 当number==1的时候输出
+            for i in range(number-1):
+                ans = m + n
+                m = n 
+                n = ans
+            return ans
