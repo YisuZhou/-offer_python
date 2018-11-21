@@ -1,0 +1,28 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def multiply(self, A):
+        # write code here
+        #看了一会儿才看懂题目啥意思2333，就是B[i]是A数组中除了A[i]的全乘积
+        #不能用除法
+        #考虑设置两个额外的数组，一个记录A[i]前面的全乘积，一个记录A[i]后面的全乘积
+        if len(A) < 1:
+            return
+        elif len(A) == 1:
+            return A
+        else:
+            len_A = len(A)
+            B_for = [1] * len_A
+            B_lat = [1] * len_A
+            B = [1] * len_A
+            # B = [1] * len_A
+            for n in range(len_A):
+                for i in A[0:n]:
+                    B_for[n] *= i
+                for j in A[n+1:]:
+                    B_lat[n] *= j
+            #B_lat[n] *= B_for[n]
+            for k in range(len_A):
+                B[k] = B_for[k] * B_lat[k]
+            return B
+            #return B_lat
+            
