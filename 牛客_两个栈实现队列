@@ -10,6 +10,7 @@ class Solution:
         return self.stack1.append(node)
     def pop(self):
         # return xx
+        # 注意还原数组
         for i in range(len(self.stack1)):
             self.stack2.append(self.stack1.pop())
         a = self.stack2.pop()
