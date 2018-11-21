@@ -5,6 +5,8 @@ class Solution:
         self.stack2 = []
     def push(self, node):
         # write code here
+        # 栈 先进后出
+        # 队列 先进先出
         return self.stack1.append(node)
     def pop(self):
         # return xx
