@@ -1,0 +1,21 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def FindGreatestSumOfSubArray(self, array):
+        # write code here
+        # 记录，当前的和，是负数就归零，前面就不用考虑了，后面随时更新最大的当前和
+        if len(array) < 0:
+            return
+        sum_p = 0
+        sum_cur = 0
+        flag = 0
+        for i in array:
+            sum_cur += i
+            if sum_cur < 0 :
+                sum_cur = 0
+            else:
+                sum_p = max(sum_p,sum_cur)
+                flag = 1
+        if flag == 0:
+            return max(array)
+        if flag:
+            return sum_p
