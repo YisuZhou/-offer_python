@@ -1,0 +1,8 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def Sum_Solution(self, n):
+        # write code here
+        # 不能用判断、循环,递归受限
+        # 尝试倒着逐个相加，并且通过 and 短路逻辑跳出递归
+        self.sum = n
+        return self.sum + (n > 0 and (self.Sum_Solution(n-1)))  #妈耶，这句话写了好几遍才对
