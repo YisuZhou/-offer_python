@@ -1,0 +1,10 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def NumberOf1(self, n):
+        # write code here
+        # 循环，每次右移一位，判断末位是不是1（与二进制1相与即可），计数
+        count = 0
+        for i in range(32):
+            count += n & 1
+            n = n>>1
+        return count
