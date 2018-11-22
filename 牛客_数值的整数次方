@@ -1,0 +1,18 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def Power(self, base, exponent):
+        # write code here
+        # 一看，难道是有什么空间限制的陷阱？？？
+        # 没办法，上了再说,考虑底数是否为0,考虑指数正负情况
+        if base == 0:
+            return 0  #其实底数为0应该是没有意义返回none，但是不通过，就返回0吧
+        if exponent == 0:
+            return 1
+        else:
+            ans = 1
+            for i in range(abs(exponent)):
+                ans *= base
+            if exponent < 0:
+                return 1/ans
+            else:
+                return ans
