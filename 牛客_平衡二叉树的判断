@@ -1,0 +1,26 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def IsBalanced_Solution(self, pRoot):
+        # write code here
+        # 平衡二叉树：一颗空树，或者左右子树的深度差不超过1
+        # 事实上就是让计算树的深度
+        if pRoot == None:
+            return True
+        else:
+            dep_left = self.tree_depth(pRoot.left)
+            dep_right = self.tree_depth(pRoot.right)
+            if abs(dep_left - dep_right) <= 1:
+                return True
+            else:
+                return False
+    
+    def tree_depth(self,root):
+        if root == None:
+            return 0
+        else:
+            return 1 + max(self.tree_depth(root.left),self.tree_depth(root.right))
