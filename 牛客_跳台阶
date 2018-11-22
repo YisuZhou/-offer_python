@@ -1,0 +1,19 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def jumpFloor(self, number):
+        # write code here
+        # 跟之前那个变态青蛙跳类似，就是这个更简单，只会两种跳法
+        if number < 1:
+            return 0
+        if number <= 2 :
+            return number
+        else:
+            # return self.jumpFloor(number-1) + self.jumpFloor(number-2)
+            # 递归运行超时，改成数组计算
+            m = 1  #对应0
+            n = 1  #对应1
+            for i in range(number-1):
+                ans = m + n
+                m = n 
+                n = ans
+            return ans
