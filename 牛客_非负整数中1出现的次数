@@ -1,0 +1,35 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def NumberOf1Between1AndN_Solution(self, n):
+        # write code here
+        # 按每位出现1的次数来计算
+        # 当计算右数第  i  位包含的 X 的个数时（注意X！=0，0不符合规律）：
+        # 取第  i  位左边（高位）的数字，乘以  10^(i−1) ，得到基础值  a
+        # 取第  i  位数字，计算修正值：
+        # 如果大于 X，则结果为  a+ 10^(i−1)
+        # 如果小于 X，则结果为  a
+        # 如果等 X，则取第  i  位右边（低位）数字，设为  b ，最后结果为  a+b+1
+        
+        ans = 0
+        bit = 0
+        # 得到位数
+        temp = n
+        while temp:
+            bit += 1
+            temp //= 10 
+        for i in range(bit):
+            ans += self.count_bit(1, n, i+1)
+        return ans
+    
+    # 计算某个位上包含1的个数
+    def count_bit(self, X, n, i):
+        high_left = n // 10**i
+        base_a = high_left * (10**(i-1))
+        bit_cur = (n // 10**(i-1)) % 10
+        if bit_cur > X:
+            return base_a + 10**(i-1)
+        elif bit_cur < X:
+            return base_a
+        else:
+            low_right = n % (10**(i-1))
+            return base_a + low_right + 1
