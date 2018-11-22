@@ -1,0 +1,25 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def minNumberInRotateArray(self, rotateArray):
+        # write code here
+        # 之前有看到过，类似于二分
+        len_arr = len(rotateArray)
+        if len_arr == 0:
+            return 0
+        if len_arr == 1:
+            return rotateArray[0]
+        if len_arr == 2:
+            return min(rotateArray[0],rotateArray[1])
+        else:
+            p = 0
+            q = len_arr - 1
+            mid = (p + q) // 2
+            if rotateArray[mid] < rotateArray[p] :
+                return self.minNumberInRotateArray(rotateArray[p:mid+1])
+            elif rotateArray[mid] > rotateArray[p] and rotateArray[q] < rotateArray[p]:
+                return self.minNumberInRotateArray(rotateArray[mid:q+1])
+            elif rotateArray[q] > rotateArray[p]:
+                return self.minNumberInRotateArray(rotateArray[p:mid+1])
+            else:
+                return min(self.minNumberInRotateArray(rotateArray[p:mid]),self.minNumberInRotateArray(rotateArray[mid+1:q+1]))
+            
