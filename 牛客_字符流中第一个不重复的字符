@@ -1,0 +1,25 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # 返回对应char
+    # 用字典和集合来辅助
+    def __init__(self):
+        self.list = []
+    def FirstAppearingOnce(self):
+        # write code here
+        self.set = set(self.list)
+        if len(self.set) == len(self.list):
+            return self.list[0]
+        else:
+            self.dic = {}
+            for i in self.set:
+                self.dic[i] = 0
+            for j in self.list:
+                self.dic[j] += 1
+            for k in self.list:
+                if self.dic[k] == 1:
+                    return k
+            return '#'
+    def Insert(self, char):
+        # write code here
+        self.list.append(char)
+        return
