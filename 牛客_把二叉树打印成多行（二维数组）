@@ -1,0 +1,35 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回二维列表[[1,2],[4,5]]
+    def Print(self, pRoot):
+        # write code here
+        # 重点在于更新每层的父节点（上一层父节点的所有子节点查询）
+        # 注意区分节点和节点的值
+        if not pRoot:
+            return []
+        ans = [[pRoot.val]]
+        fat_node = [pRoot]
+        count = 1
+        while count:
+            inner = []
+            inner_val = []
+            length = count
+            count = 0
+            for i in range(length):
+                if fat_node[i].left:
+                    inner.append(fat_node[i].left)
+                    inner_val.append(fat_node[i].left.val)
+                    count += 1
+                if fat_node[i].right:
+                    inner.append(fat_node[i].right)
+                    inner_val.append(fat_node[i].right.val)
+                    count += 1
+            if inner_val != []:
+                ans.append(inner_val)
+            fat_node = inner
+        return ans
