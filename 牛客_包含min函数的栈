@@ -1,0 +1,30 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # 要考虑到存在重复元素的情况
+    # 不能用一个数来保存当前的最小值，否则出栈之后不能更新之前的最小值
+    # 不太懂top函数的意义，可能是用来代替取[-1]元素的函数吧
+    def __init__(self):
+        self.min_s = []
+        self.stack = []
+    def push(self, node):
+        # write code here
+        self.stack.append(node)
+        if len(self.min_s) < 1:
+            self.min_s.append(node)
+            return
+        else:
+            if node <= self.min_s[-1]:  #注意等于也应该要入栈
+                self.min_s.append(node)
+            return
+    def pop(self):
+        # write code here
+        if self.stack[-1] == self.min_s[-1]:  #原来的最小值出栈别忘了更新最小栈
+            self.min_s.pop()
+        self.stack.pop()  #得在比完之后再pop啊
+        return
+    def top(self):
+        # write code here
+        return self.min_s[-1]
+    def min(self):
+        # write code here
+        return self.min_s[-1]
