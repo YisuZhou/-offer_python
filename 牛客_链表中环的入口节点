@@ -1,0 +1,20 @@
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+# 其实还是找第一个重复的元素
+class Solution:
+    def __init__(self):
+        self.list1 = []
+    def EntryNodeOfLoop(self, pHead):
+        # write code here
+        self.list1.append(pHead)
+        p = pHead.next
+        while(p):
+            self.list1.append(p)
+            self.set1 = set(self.list1)
+            if len(self.list1) != len(self.set1):
+                return p
+            p = p.next
+        return None
