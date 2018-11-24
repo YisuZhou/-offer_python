@@ -1,0 +1,24 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def isSymmetrical(self, pRoot):
+        # write code here
+        # 如果一个二叉树同此二叉树的镜像是同样的，定义其为对称的二叉树
+        # 同时分别遍历二叉树的左右子树，判断每个节点对应的值是否相等
+        if pRoot == None:
+            return True
+        else:
+            return self.adj_equ(pRoot.left,pRoot.right)
+        
+        
+    def adj_equ(self,p1,p2):
+        if p1 == None and p2 == None:
+            return True
+        elif (p1 and p2) and p1.val == p2.val:
+            return (self.adj_equ(p1.left,p2.right) and self.adj_equ(p1.right,p2.left))
+        else:
+            return False
