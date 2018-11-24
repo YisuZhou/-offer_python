@@ -1,0 +1,7 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def LeftRotateString(self, s, n):
+        # write code here
+        s_left= s[:n]
+        s_right = s[n:]
+        return s_right+s_left
