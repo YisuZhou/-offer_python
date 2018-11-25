@@ -1,0 +1,39 @@
+# -*- coding:utf-8 -*-
+# class TreeLinkNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#         self.next = None
+class Solution:
+    def GetNext(self, pNode):
+        # write code here
+        # 四种基本的遍历思想为：
+        # 前序遍历：根结点 ---> 左子树 ---> 右子树
+        # 中序遍历：左子树---> 根结点 ---> 右子树
+        # 后序遍历：左子树 ---> 右子树 ---> 根结点
+        # 层次遍历：仅仅需按层次遍历就可以
+        
+        # 查找下一个节点，重点应该是判断他本身是什么结点
+        
+        # 空树
+        if pNode == None:
+            return None
+
+        # 如果这个节点是有右子树,下一个节点就是右子树的最左边的结点
+        if pNode.right != None:
+            p = pNode.right
+            while p.left != None:
+                p = p.left
+            return p
+        # 没有右子树的，也可以分成两类
+        # 1是父节点左孩子，那么父节点就是下一个节点
+        # 2是父节点的右孩子,找他的父节点(的父节点的父节点...)...
+        #  直到当前结点是其父节点的左孩子。如果没有，那么他就是尾节点。
+        p = pNode
+        while p.next != None:
+            p_next = p.next
+            if p_next.left == p:
+                return p_next
+            p = p_next
+        return None
