@@ -1,0 +1,33 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def IsPopOrder(self, pushV, popV):
+        # write code here
+        # 模拟入栈场景
+        # 借用一个辅助的栈，遍历压栈顺序，先讲第一个放入栈中，这里是1，然后判断栈顶元素是不是出栈顺序的第一个元素
+        # 不是就继续压栈，直到相等以后开始出栈，出栈一个元素，则将出栈顺序向后移动一位，直到不相等
+        # 这样循环等压栈顺序遍历完成，如果辅助栈还不为空，说明弹出序列不是该栈的弹出顺序。
+        
+        # 注意时刻注意index不要超出范围
+        
+        vec = []
+        ipop = 0
+        ipush = 0
+        while ipush < len(pushV):
+            vec.append(pushV[ipush])
+            while vec[-1] != popV[ipop]:
+                if ipush >= len(pushV)-1:
+                    return False
+                ipush += 1
+                vec.append(pushV[ipush])
+            while vec[-1] == popV[ipop]:
+                vec.pop()
+                ipop += 1
+                if len(vec) == 0:
+                    break
+                if ipop >= len(popV):
+                    break
+            ipush += 1
+        if len(vec) == 0 :
+            return True
+        else:
+            return False
