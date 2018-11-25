@@ -1,0 +1,34 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def FindNumbersWithSum(self, array, tsum):
+        # write code here
+        # 重点在于理清下标移动的方案
+        # 左标和右标初始化在最左和最右
+        # 和大了移动右边，和小了移动左边
+        # 找到一对就删除一对
+        flag = 1
+        ans = []
+        while flag:
+            left = 0
+            if array == []:
+                break
+            right = len(array)-1
+            while right > left and array[left]+array[right] > tsum:
+                right -= 1
+            while left < right and array[left]+array[right] < tsum:
+                left += 1
+            if array[left] + array[right] == tsum:
+                ans.append([array[left],array[right]])
+                array.pop(left)
+                array.pop(right-1)  # pop了一个少了一个，要减一！！！！！！！！！
+            else:
+                flag = 0
+        if ans == []:
+            return []
+        else:
+            mul = []
+            for i in ans:
+                mul.append(i[0]*i[1])
+            mul_min = min(mul)
+            inx_min = mul.index(mul_min)
+            return ans[inx_min][:]
