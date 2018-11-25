@@ -1,0 +1,45 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def GetNumberOfK(self, data, k):
+        # write code here
+        # 用类似二分的方案，大致确定这个数字所在的位置，然后统计左右的数字
+        # 注意细节
+        # 1 首先，空数组
+        # 2 注意完全不在数组里的数字，包括太大，太小，不在数组里
+        # 3 用二分查找到的索引值，需要再判断是不是要找的数字k（二分查找end==sart的时候也会返回，可能数字就完全不在数组内）
+        
+        if len(data)<1:
+            return 0
+        if k > data[-1]:
+            return 0
+        if k < data[0]:
+            return 0
+        else:
+            ref = self.two_divide(data, k, 0, len(data)-1)
+            if data[ref] != k:
+                return 0
+            count_l = 0
+            count_r = 0
+            if ref > 0:
+                cur = ref-1
+                while cur >= 0 and data[cur] == k:
+                    count_l += 1
+                    cur -= 1 
+            if ref < len(data)-1:
+                cur = ref + 1
+                while cur < len(data) and data[cur] == k:
+                    count_r += 1
+                    cur += 1
+            return 1+count_l+count_r
+        
+    def two_divide(self, data, k, start, end):
+        mid = (start + end) // 2
+        if start == end:
+            return end
+        if data[mid] == k:
+            return mid
+        else:
+            if data[mid] < k:
+                return self.two_divide(data, k, mid+1, end)
+            else:
+                return self.two_divide(data, k, start, mid-1)
