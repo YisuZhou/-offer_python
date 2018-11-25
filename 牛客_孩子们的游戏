@@ -1,0 +1,41 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        # write code here
+            if n == 0 or m == 0:
+                return -1
+            else:
+                total = n * [1]
+                count_n = n
+                count_inx = 0
+                count_m = 0
+                while count_n > 1:
+                    inx = count_inx % n
+                    if total[inx] == 1:
+                        count_m += 1
+                        if count_m % m == 0:
+                            total[inx] = 0
+                            count_n -= 1
+                    count_inx += 1
+                for i in range(n):
+                    if total[i] == 1:
+                        return i
+==================以上程序显示超时，修改为以下，每次计算下一个要出去的小朋友序号=====================
+
+
+# -*- coding:utf-8 -*-
+class Solution:
+    def LastRemaining_Solution(self, n, m):
+        # write code here
+            if n == 0 or m == 0:
+                return -1
+            else:
+                total = list(range(n))
+                count = n
+                inx = 0
+                while count > 1:
+                    k = (inx + m - 1) % count  % 计算下一个，注意%count而不是n。每出去一个小朋友，则旁边的小朋友就顶出去的小朋友的位置上
+                    total.pop(k)
+                    inx = k
+                    count -= 1
+                return total[0]
