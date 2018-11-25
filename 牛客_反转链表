@@ -1,0 +1,23 @@
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    # 返回ListNode
+    def ReverseList(self, pHead):
+        # write code here
+        # 每次存储前一个结点
+        # 注意，最后结点要指向None才行
+        if pHead == None:
+            return None
+        if pHead.next == None:
+            return pHead
+        pre = None
+        pn = pHead
+        while pn:
+            lat = pn.next
+            pn.next = pre
+            pre = pn
+            pn = lat
+        return pre
