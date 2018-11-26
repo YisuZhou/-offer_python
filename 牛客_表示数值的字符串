@@ -1,0 +1,74 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # s字符串
+    def isNumeric(self, s):
+        # write code here
+        # 判断是否含有e/E
+        # 没有的话，第一位可以是+、-，其他就应该全部是数字
+        # 有的话，分为e前面的部分和后面的部分
+        # 前面的部分，第一位可以是+、-，其他可以是整数或者小数（小数可以.直接开始）
+        # 后面的部分，第一位可以是+、-，其他应该全部是整数
+        inx_e = s.find('E')
+        if inx_e != -1:#  有E
+            if s.find('e') != -1:  #还有e
+                return False
+        else:  #没有E
+            if s.find('e') != -1:  #还有e
+                inx_e = s.find('e')
+            else:  #没有E和e
+                inx_e = len(s)
+        if inx_e == 0:
+            return False
+        if inx_e == len(s)-1:
+            return False
+         
+        s_left = s[:inx_e]
+        if inx_e >= len(s) - 1:
+            s_right = []
+        else:
+            s_right = s[inx_e+1:]
+             
+        # 先判断后面的部分吧
+        right = self.is_num(s_right)
+        # 判断前面的部分
+        if right:
+            left = self.is_num(s_left)
+            if left:
+                return True
+            else:  # 有可能是有小数
+                if len(s_left) < 2:
+                    return False
+                if (s_left[0] != '+') and (s_left[0] != '-'):
+                    s_last = s_left
+                else:
+                    s_last = s_left[1:]
+                # 判断是不是小数
+                return self.is_dcm(s_last)
+        else:
+            return False
+        
+    def is_num(self,s_right):
+        # 只按后面部分判断,整数，可以带+、-
+        if len(s_right) == 1:
+            if not s_right.isdigit():
+                return False
+            else:
+                return True
+        elif len(s_right) > 1:
+            if not s_right[1:].isdigit():
+                return False
+            if (s_right[0] != '+') and (s_right[0] != '-') and (not s_right[0].isdigit()):
+                return False
+            else:
+                return True
+        else:
+            return True
+        
+    def is_dcm(self,s_last):
+        if s_last.find('.') < 0 or s_last.find('.') >= len(s_last)-1:  #没有合理的小数点
+            return False
+        inx_d = s_last.find('.')
+        if inx_d == 0:
+            return s_last[inx_d+1:].isdigit()
+        else:
+            return (s_last[:inx_d].isdigit() and s_last[inx_d+1:].isdigit())
