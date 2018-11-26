@@ -1,0 +1,28 @@
+# -*- coding:utf-8 -*-
+import math
+class Solution:
+    def FindContinuousSequence(self, tsum):
+        # write code here
+        # 等差数列求和公式 s=0.5*n^2+(a1-0.5)*n，单调增
+        # 求a1的可能性，a1 = (s/n)-0.5*n+0.5，必须为正整数
+        # n越大，a1越小
+        
+        # 求n的最大值
+        tsum = float(tsum)  # python2的大坑，/只有是float的时候才是真的除
+        n = 2
+        while (n+n**2)< 2*tsum:
+            n += 1
+        n_max = n
+        
+        ans = []
+        for i in range(n_max,1,-1):
+            a1 = (tsum/i) - 0.5*i + 0.5
+            if a1 < 1:  # 注意a1的限制
+                continue
+            if abs(a1 - int(a1)) <= 0.00001:
+                num = []
+                for j in range(i):
+                    num.append(int(a1))
+                    a1 += 1
+                ans.append(num)
+        return ans
