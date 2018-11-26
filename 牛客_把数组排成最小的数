@@ -1,0 +1,23 @@
+# -*- coding:utf-8 -*-
+import itertools
+class Solution:
+    def PrintMinNumber(self, numbers):
+        # write code here
+        # 全排列会不会太过分？
+        length = len(numbers)
+        if length == 0:
+            return ''
+        if length == 1:
+            return numbers[0]
+        
+        str_list = []
+        for i in numbers:
+            str_list.append(str(i))
+        total_inx = list(itertools.permutations(list(range(length)),length))
+        total_num = []
+        for j in total_inx:
+            temp = ''
+            for k in range(length):
+                temp += str_list[j[k]]
+            total_num.append(int(temp))
+        return min(total_num)
