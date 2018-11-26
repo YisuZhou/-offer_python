@@ -72,3 +72,21 @@ class Solution:
             return s_last[inx_d+1:].isdigit()
         else:
             return (s_last[:inx_d].isdigit() and s_last[inx_d+1:].isdigit())
+            
+            
+            
+=================================================
+
+可以直接用float来测验，真的厉害了
+
+# -*- coding:utf-8 -*-
+class Solution:
+    # s字符串
+    def isNumeric(self, s):
+        # write code here
+        try :
+            p = float(s)
+            return True
+        except:
+            return False
+
