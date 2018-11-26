@@ -1,0 +1,19 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def MoreThanHalfNum_Solution(self, numbers):
+        # write code here
+        if len(numbers) == 0:
+            return 0
+        
+        set_num = set(numbers)
+        dic = {}
+        for i in set_num:
+            dic[i] = 0
+        
+        len_2 = len(numbers) / 2
+        
+        for j in numbers:
+            dic[j] += 1
+            if dic[j] > len_2:
+                return j
+        return 0
