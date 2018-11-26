@@ -1,0 +1,49 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def Convert(self, pRootOfTree):
+        # write code here
+        # 二叉查找树（Binary Search Tree），（又：二叉搜索树，二叉排序树）
+        # 可以是一棵空树，
+        # 或者是具有下列性质的二叉树： 
+        # 若它的左子树不空，则左子树上所有结点的值均小于它的根结点的值；
+        # 若它的右子树不空，则右子树上所有结点的值均大于它的根结点的值；
+        # 它的左、右子树也分别为二叉排序树。
+        
+        # 其实中序遍历即可，但是双向是要怎么指。。(看了下答案，发现时还是用left和right来指)
+        if pRootOfTree == None:
+            return pRootOfTree
+        if pRootOfTree.left == None and pRootOfTree.right == None:
+            return pRootOfTree
+        # 将左子树解决
+        self.Convert(pRootOfTree.left)
+        # 将根结点将左子树最大的结点连接
+        left = pRootOfTree.left
+        # 获得左子树的最大值
+        if left:
+            while left.right:
+                left = left.right
+            # 双向连接
+            left.right = pRootOfTree
+            pRootOfTree.left = left
+            
+        # 处理右子树
+        self.Convert(pRootOfTree.right)
+        # 将根结点连接右子树的最小节点
+        right = pRootOfTree.right
+        # 获得右子树的最小值
+        if right:
+            while(right.left):
+                right = right.left
+            # 双向连接
+            right.left = pRootOfTree
+            pRootOfTree.right = right
+        
+        # 返回表头
+        while (pRootOfTree.left):
+            pRootOfTree = pRootOfTree.left
+        return pRootOfTree
