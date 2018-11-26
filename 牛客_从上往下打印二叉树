@@ -1,0 +1,33 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回从上到下每个节点值列表，例：[1,2,3]
+    def PrintFromTopToBottom(self, root):
+        # write code here
+        # 之前有一个分行打印二叉树的，用的二维列表
+        # 每次存上一层的节点
+        # 返回的是结点的值，而不是节点本身，要注意
+        node = []
+        if root == None:
+            return node
+        if root.left == None and root.right == None:
+            node.append(root.val)
+            return node
+        
+        father = []
+        father.append(root)
+        while len(father):
+            for i in father:
+                node.append(i.val)
+            child = []
+            for fa in father:
+                if fa.left:
+                    child.append(fa.left)
+                if fa.right:
+                    child.append(fa.right)
+            father = child
+        return node
