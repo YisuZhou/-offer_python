@@ -3,6 +3,13 @@ class Solution:
     def IsContinuous(self, numbers):
         # write code here
         # 对不同的0的个数的情况进行分析
+        #更简单地
+        # 1、排序 
+        # 2、计算所有相邻数字间隔总数 
+        # 3、计算0的个数 
+        # 4、如果2、3相等，就是顺子 
+        # 5、如果出现对子，则不是顺子
+
         
         if len(numbers) != 5:
             return False
