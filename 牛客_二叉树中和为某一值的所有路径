@@ -1,0 +1,25 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回二维列表，内部每个列表表示找到的路径
+    # 想采用递归
+    # 注意数组里要存val而不是节点。。。
+    def FindPath(self, root, expectNumber):
+        # write code here
+        if root == None:
+            return []
+        if root.left == None and root.right == None:
+            if root.val == expectNumber:
+                return [[root.val]]
+        total = []
+        left = self.FindPath(root.left,expectNumber-root.val)
+        right = self.FindPath(root.right,expectNumber-root.val)
+        
+        for path in left+right:
+            total.append([root.val]+path)
+        
+        return total
