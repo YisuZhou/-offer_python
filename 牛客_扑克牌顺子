@@ -1,0 +1,64 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def IsContinuous(self, numbers):
+        # write code here
+        # 对不同的0的个数的情况进行分析
+        
+        if len(numbers) != 5:
+            return False
+        
+        num_sort = sorted(numbers)
+        zeros = 0
+        for num in num_sort:
+            if num == 0:
+                zeros += 1
+        
+        if zeros > 3:
+            return True
+        
+        if zeros == 0:
+            for i in range(4):
+                if num_sort[i+1]-num_sort[i] == 1:
+                    continue
+                else:
+                    return False
+            return True
+        
+        if zeros == 1:
+            m = 0
+            for i in range(1,4,1):
+                if num_sort[i+1]-num_sort[i] == 1:
+                    continue
+                elif num_sort[i+1]-num_sort[i] == 2:
+                    m += 1
+                else:
+                    return False
+            if m <= 1:
+                return True
+            else:
+                return False
+        
+        if zeros == 2:
+            m2 = 0
+            m3 = 0
+            for i in range(2,4,1):
+                if num_sort[i+1]-num_sort[i] == 1:
+                    continue
+                elif num_sort[i+1]-num_sort[i] == 2:
+                    m2 += 1
+                elif num_sort[i+1]-num_sort[i] == 3:
+                    m3 += 1
+                else:
+                    return False
+            if m2 <= 2 and m3 == 0:
+                return True
+            elif m3 == 1 and m2 == 0:
+                return True
+            else:
+                return False
+            
+        if zeros == 3:
+            if num_sort[4]-num_sort[3] <= 4 and num_sort[4]-num_sort[3] >= 1:  #注意差值不能等于0啊
+                return True
+            else:
+                return False
