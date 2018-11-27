@@ -1,0 +1,30 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def __init__(self):
+        self.vec = []
+    def Insert(self, num):
+        # write code here
+        if len(self.vec) == 0:
+            self.vec.append(num)
+            return
+        elif self.vec[0] >= num:
+            self.vec.insert(0,num)
+            return
+        elif self.vec[-1] <= num:
+            self.vec.append(num)
+            return
+        else:
+            for i in range(len(self.vec)-1):
+                if self.vec[i]<= num and self.vec[i+1] > num:
+                    self.vec.insert(i+1,num)
+                    return
+        #======================可以直接用自带API排序，vec.append(num),然后vec.sort()即可
+    def GetMedian(self,vec):
+        # write code here
+        if len(self.vec) < 1:
+            return None
+        else:
+            if len(self.vec) % 2 == 0:
+                return (self.vec[len(self.vec)//2 -1] + self.vec[len(self.vec)//2])/2.0
+            else:
+                return self.vec[int(len(self.vec)//2)]
