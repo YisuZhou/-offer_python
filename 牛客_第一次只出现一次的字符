@@ -1,0 +1,23 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def FirstNotRepeatingChar(self, s):
+        # write code here
+        s_set = set(list(s))
+        dic = {}
+        for c in s_set:
+            dic[c] = 0
+        
+        for i in list(s):
+            dic[i] += 1
+        
+        ans = len(s)
+        for n in dic:
+            if dic[n] == 1:
+                inx = s.find(n)
+                if inx < ans:
+                    ans = inx
+        
+        if ans == len(s):
+            return -1
+        else:
+            return ans
