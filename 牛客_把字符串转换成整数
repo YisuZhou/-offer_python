@@ -1,0 +1,42 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def StrToInt(self, s):
+        # write code here
+        # 哎哟喂= =这题目，又是不清不楚。。
+        # 支不支持 科学计数 啊？
+        
+        # 先按不支持科学计数做
+        # 是否有正负号
+        # 除了符号，是否全都是数字
+        # 挨个取每一位
+        flag_p = 0
+        flag_n = 0
+        inx_psym = s.find('+')
+        if inx_psym != -1:
+            flag_p = 1
+            if inx_psym != 0:
+                return 0
+        inx_nsym = s.find('-')
+        if inx_nsym != -1:
+            flag_n = 1
+            if inx_nsym != 0:
+                return 0
+        
+        if flag_p or flag_n:
+            sn = s[1:]
+        else:
+            sn = s
+        
+        if not sn.isdigit():
+            return 0
+        
+        ans = 0
+        for i in range(len(sn)):
+            ans = 10*ans + int(sn[i])
+        
+        if flag_p == 1:
+            return ans
+        elif flag_n == 1:
+            return ans*(-1)
+        else:
+            return ans
