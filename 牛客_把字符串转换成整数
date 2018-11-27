@@ -8,7 +8,7 @@ class Solution:
         # 先按不支持科学计数做
         # 是否有正负号
         # 除了符号，是否全都是数字
-        # 挨个取每一位
+        # 挨个取每一位（s[i]>='0' and s[i]<='9'也可以啊）
         flag_p = 0
         flag_n = 0
         inx_psym = s.find('+')
