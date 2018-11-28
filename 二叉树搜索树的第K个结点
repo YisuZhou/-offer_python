@@ -1,0 +1,27 @@
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回对应节点TreeNode
+    def __init__(self):
+        self.node = []
+    def KthNode(self, pRoot, k):
+        # write code here
+        # 中序遍历一遍，找出最小的第k个
+        if pRoot == None or k < 1:
+            return None
+        self.Mid(pRoot)
+        if len(self.node) < k :
+            return None
+        else:
+            return self.node[k-1]
+        
+        
+    def Mid(self,root):
+        if root == None:
+            return None
+        self.Mid(root.left)
+        self.node.append(root)
+        self.Mid(root.right)
