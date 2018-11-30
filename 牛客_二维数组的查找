@@ -1,0 +1,47 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # array 二维列表
+    def Find(self, target, array):
+        # write code here
+        # 可以排除掉某一部分，然后再找在不在
+        # 注意最大索引值
+        if len(array) == 0:
+            return False
+        if len(array[0]) == 0:
+            return False
+        if array[0][0] > target:
+            return False
+        if array[-1][-1] < target:
+            return False
+        
+        for i_col in range(len(array[0])):
+            if array[0][i_col] < target:
+                if i_col == len(array[0])-1:
+                    i_col = len(array[0])
+                    break  # 注意这里
+                else:
+                    continue
+            if array[0][i_col] == target:
+                return True
+            if array[0][i_col] > target:
+                break
+        
+        for i_row in range(len(array)):
+            if array[i_row][0] < target:
+                if i_row == len(array)-1:
+                    i_row = len(array)
+                    break  # 注意这里
+                else:
+                    continue
+            if array[i_row][0] == target:
+                return True
+            if array[i_row][0] > target:
+                break
+            
+        
+        for i in range(i_row):
+            for j in range(i_col):
+                if array[i][j] == target:
+                    return True
+        
+        return False
