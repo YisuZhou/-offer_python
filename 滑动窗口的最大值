@@ -1,0 +1,20 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def maxInWindows(self, num, size):
+        # write code here
+        # 注意数组长度<窗口长度，以及窗口长度=0的情况
+        # 感觉这样的情况应该返回全数组的最大值啊
+        length = len(num)
+        if length < size:
+            return []
+        if size == 0:
+            return []
+        arr_max = []
+        i_start = 0
+        i_end = size-1
+        while i_end < length:
+            arr_max.append(max(num[i_start:i_end+1]))
+            i_start += 1
+            i_end += 1
+        
+        return arr_max
