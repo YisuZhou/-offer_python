@@ -1,0 +1,32 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def Print(self, pRoot):
+        # write code here
+        # 结合了分行打印二叉树加上一点倒序
+        if pRoot == None:
+            return []
+        ans = [[pRoot.val]]
+        father = [pRoot]
+        row = 1
+        while len(father):
+            child = []
+            row += 1
+            for i in father:
+                if i.left != None:
+                    child.append(i.left)
+                if i.right != None:
+                    child.append(i.right)
+            if len(child):
+                child_v = []
+                for v in child:
+                    child_v.append(v.val)
+                if row % 2 == 0:
+                    child_v.reverse()
+                ans.append(child_v)
+            father = child
+        return ans
