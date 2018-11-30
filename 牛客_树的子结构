@@ -1,0 +1,26 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def HasSubtree(self, pRoot1, pRoot2):
+        # write code here
+        # 本来想两个二叉树都中序遍历一遍存在数组里，比较两个数组的，但是是错的2333
+        # 行吧那就递归吧
+        # 如果正好两个根节点对的上，那就看看吧,不行那就左支和右支看别看看
+        if pRoot1 == None or pRoot2 == None:
+            return False
+        
+        return self.issubtree(pRoot1,pRoot2) or self.HasSubtree(pRoot1.left,pRoot2) or self.HasSubtree(pRoot1.right,pRoot2)
+    
+    def issubtree(self,root1,root2):
+        if root2 == None:  # 小树都结束了，没问题
+            return True
+        if root1 == None:  # 小树还没结束，大树却结束了，肯定不对
+            return False
+        if root1.val != root2.val:
+            return False
+        return self.issubtree(root1.left,root2.left) and self.issubtree(root1.right,root2.right)
+        
