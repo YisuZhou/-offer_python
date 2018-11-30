@@ -1,0 +1,33 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def VerifySquenceOfBST(self, sequence):
+        # write code here
+        # 用递归吧，数组的最后一个为分界线，左边大右边小
+        # 这个答案又奇怪了，空树应该也是true啊，怎么又是false
+        if len(sequence) == 0:
+            return False
+        if len(sequence) <= 2:
+            return True
+        else:
+            mid = sequence[-1]
+            seq_left = []
+            seq_right = []
+            for i in range(len(sequence)-1):
+                if sequence[i] < mid:
+                    continue
+                else:
+                    seq_left = sequence[:i]
+                    i_right = i
+                    seq_right = sequence[i_right:-1]
+                    break
+            for right in seq_right:
+                if right < mid:
+                    return False
+            if len(seq_left) == 0 and len(seq_right) == 0:
+                return True
+            if len(seq_left) == 0 and len(seq_right) != 0:
+                return self.VerifySquenceOfBST(seq_right)
+            if len(seq_left) != 0 and len(seq_right) == 0:
+                return self.VerifySquenceOfBST(seq_left)
+            else:
+                return (self.VerifySquenceOfBST(seq_left) and self.VerifySquenceOfBST(seq_right))
