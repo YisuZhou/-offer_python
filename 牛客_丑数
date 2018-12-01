@@ -1,0 +1,24 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def GetUglyNumber_Solution(self, index):
+        # write code here
+        # 就自己× 2 3 5呗,但是只能一个一个来，不然大小会错
+        # 其实就是三个数组取当前的最小值
+        # 用索引号来记录位置
+        if index < 1:
+            return 0
+        ans = [1]
+        inx2 = 0
+        inx3 = 0
+        inx5 = 0
+        for i in range(index-1):
+            new = min(ans[inx2]*2,ans[inx3]*3,ans[inx5]*5)
+            ans.append(new)
+            # //这三个if有可能进入一个或者多个，进入多个是三个队列头最小的数有多个的情况
+            if new % 2 == 0:
+                inx2 += 1
+            if new % 3 == 0:
+                inx3 += 1
+            if new % 5 == 0:
+                inx5 += 1
+        return ans[-1]
