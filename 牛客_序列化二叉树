@@ -1,0 +1,43 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    def Serialize(self, root):
+        # write code here
+        # 二叉树的序列化是指：
+        # 把一棵二叉树按照某种
+        # 遍历方式的结果以某种格式
+        # 保存为字符串
+        # 某种符号表示空节点（#）
+        # 以下按前序遍历方式，递归增长字符串
+        if root == None:
+            return '#'
+        return str(root.val)+","+self.Serialize(root.left)+","+self.Serialize(root.right)
+        
+        
+        
+    def Deserialize(self, s):
+        # write code here
+        # 二叉树的反序列化是指:
+        # 根据某种遍历顺序得到的序列化字符串结果str重构二叉树。
+        # 遇数作左；遇#变向
+        if s is None:
+            return None
+        if len(s)==1 and s[0]=="#":
+            return None
+        self.index = 0
+        arr = s.split(',')
+        return self.connect(arr)
+    def connect(self,arr):
+        index = self.index
+        self.index = index+1
+        if arr[index] != "#":
+            root = TreeNode(int(arr[index]))
+            root.left = self.connect(arr)
+            root.right = self.connect(arr)
+            return root
+        elif arr[index]=="#":
+            return None
