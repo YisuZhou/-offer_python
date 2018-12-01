@@ -1,0 +1,37 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def init(self,thr,r,c):
+        self.table = []
+        self.count = 0
+        for i in range(r):
+            add = []
+            for j in range(c):
+                add.append(self.cal_sum(thr,i,j))
+            self.table.append(add)
+        
+    def cal_sum(self,thr,r,c):
+        sum_n = 0
+        for i in str(r):
+            sum_n += int(i)
+        for j in str(c):
+            sum_n += int(j)
+        if sum_n > thr:
+            return False
+        else:
+            return True
+        
+    def movingCount(self, threshold, rows, cols):
+        # write code here
+        # 第一反应是用强化学习？？？
+        # 行吧行吧，设个表格做标记，慢慢找吧
+        self.init(threshold, rows, cols)
+        self.move(0,0,rows,cols)
+        return self.count
+        
+    def move(self,i,j,r,c):
+        if 0<= i < r and 0<= j < c:  # 注意不要超出索引范围 
+            if self.table[i][j]:
+                self.count += 1
+                self.table[i][j] = False
+                self.move(i-1,j,r,c) or self.move(i+1,j,r,c) or self.move(i,j-1,r,c) or self.move(i,j+1,r,c)
+                
