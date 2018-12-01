@@ -1,0 +1,37 @@
+# -*- coding:utf-8 -*-
+# class RandomListNode:
+#     def __init__(self, x):
+#         self.label = x
+#         self.next = None
+#         self.random = None
+class Solution:
+    # 返回 RandomListNode
+    def Clone(self, pHead):
+        # write code here
+        # 不能随手就RandomListNode，需要记录他们的内存地址，不然分不清两个label一样的节点
+        
+        id_node_dic = {}
+        oldid_newid_dic = {}
+        head = pHead
+        p = None
+        new = None
+        # 先把next的重新存
+        while head:
+            node = RandomListNode(head.label)
+            node.random = head.random
+            oldid_newid_dic[id(head)] = id(node)
+            id_node_dic[id(node)] = node
+            head = head.next
+            if new:
+                new.next = node
+                new = new.next
+            else:
+                new = node
+                p = node
+        # 再从头开始重新存random
+        new = p
+        while new:
+            if new.random != None:
+                new.random = id_node_dic[oldid_newid_dic[id(new.random)]]
+            new = new.next
+        return p
