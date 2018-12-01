@@ -1,0 +1,29 @@
+# -*- coding:utf-8 -*-
+class Solution:
+            
+    def hasPath(self, matrix, rows, cols, path):
+        # write code here
+        # 递归，找到一个就分四个方向去找剩下的
+        for i in range(rows):
+            for j in range(cols):
+                if matrix[i*cols+j] == path[0]:
+                    if self.find(list(matrix), rows, cols, path[1:], i, j):
+                        return True
+        return False
+        
+    def find(self,m,r,c,p,i,j):
+        if i >= r or j >= c:
+            return False
+        if len(m) == 0 or len(p) == 0:
+            return True
+        m[i*c+j] = '-1'
+        if j+1<c and m[i*c+j+1]==p[0]:
+            return self.find(m,r,c,p[1:],i,j+1)
+        elif j-1>=0 and m[i*c+j-1]==p[0]:
+            return self.find(m,r,c,p[1:],i,j-1)
+        elif i+1<r and m[(i+1)*c+j]==p[0]:
+            return self.find(m,r,c,p[1:],i+1,j)
+        elif i-1>=0 and m[(i-1)*c+j]==p[0]:
+            return self.find(m,r,c,p[1:],i-1,j)
+        else:
+            return False
