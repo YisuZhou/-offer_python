@@ -1,0 +1,39 @@
+# -*- coding:utf-8 -*-
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+class Solution:
+    # 返回构造的TreeNode根节点
+    # 递归返回节点，然后挨个连接
+    # 注意索引超出范围
+    def reConstructBinaryTree(self, pre, tin):
+        # write code here
+        if len(pre) == 0:
+            return None
+        if len(pre) == 1:
+            return TreeNode(pre[0])
+        
+        cur = pre[0]
+        inx = tin.index(cur)
+        cur = TreeNode(cur)
+        if inx == 0:
+            pre_left = []
+            tin_left = []
+            pre_right = pre[inx+1:]
+            tin_right = tin[inx+1:]
+        if inx == len(tin)-1:
+            pre_left = pre[1:inx+1]
+            tin_left = tin[:inx]
+            pre_right = []
+            tin_right = []
+        else:
+            pre_left = pre[1:inx+1]
+            tin_left = tin[:inx]
+            pre_right = pre[inx+1:]
+            tin_right = tin[inx+1:]
+        cur.left = self.reConstructBinaryTree( pre_left, tin_left)
+        cur.right = self.reConstructBinaryTree( pre_right, tin_right)
+        
+        return cur
