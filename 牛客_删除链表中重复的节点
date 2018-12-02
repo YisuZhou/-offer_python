@@ -1,0 +1,33 @@
+# -*- coding:utf-8 -*-
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+class Solution:
+    def deleteDuplication(self, pHead):
+        # write code here
+        # 一个指向上一个不重复的节点
+        # 一个动态地指向的节点
+        if pHead == None:
+            return pHead
+        if pHead.next == None:
+            return pHead
+         
+        p_new = ListNode(-1) # 新的链表头
+        p_new.next = pHead
+        p_last = p_new #上一个不重复的节点
+        move = pHead # 移动
+        
+        while move != None:
+            if (move.next != None) and (move.val == move.next.val):
+                    temp = move.next
+                    while temp and temp.val == move.val:
+                        temp = temp.next
+                    move = temp
+                    p_last.next = temp
+                    
+            else:
+                p_last = move
+                move = move.next
+                
+        return p_new.next
