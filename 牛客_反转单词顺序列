@@ -1,0 +1,21 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def ReverseSentence(self, s):
+        # write code here
+        # 给的是字符串，返回的是带空格的字符串
+        i_l = 0
+        i_r = 0
+        ans = []
+        for i in range(len(s)):
+            if s[i] == ' ':
+                i_r = i
+                ans.append(s[i_l:i_r])
+                i_l = i_r + 1
+        ans.append(s[i_l:])
+        ans.reverse()
+        
+        string = ''
+        for word in ans:
+            string += word
+            string += ' '
+        return string[:-1]
