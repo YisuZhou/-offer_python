@@ -8,6 +8,9 @@ class Solution:
         # write code here
         # 一个指向上一个不重复的节点
         # 一个动态地指向的节点
+        # 不能只看两个节点，要看三个，所以要注意纸箱上一个不重复节点指针的连接时机和移动时机
+        # 在解决掉一段重复的节点就可以连接了
+        # 但是只有确定下一个也不是重复节点的时候才能移动
         if pHead == None:
             return pHead
         if pHead.next == None:
