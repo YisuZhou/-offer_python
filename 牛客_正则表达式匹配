@@ -1,0 +1,30 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # s, pattern都是字符串
+    def match(self, s, pattern):
+        # write code here
+        # 两个字符串都为空，返回true
+        # 当第一个字符串不空，第二个字符串空，返回false
+        # =1=  pattern下一个字符不为‘*’：直接匹配当前字符。
+        # 如果pattern当前字符为‘.’,可以任意抵一个，但是不能是多余的。
+        # =2=pattern下一个字符为‘*’：考虑匹配一个还是多个字符
+        # 两个字符串的当前匹配字符配合后移
+        
+        if (len(s) == 0 and len(pattern) == 0):
+            return True
+        if (len(s) > 0 and len(pattern) == 0):
+            return False
+        
+        # pattern下一个字符为‘*’，要注意len(pattern)
+        if (len(pattern) > 1 and pattern[1] == '*'):
+            if (len(s) > 0 and (s[0] == pattern[0] or pattern[0] == '.')):
+                # 匹配0个，1个或多个
+                return (self.match(s, pattern[2:]) or self.match(s[1:], pattern[2:]) or self.match(s[1:], pattern))
+            else:
+                # 匹配0个，那就直接往后
+                return self.match(s, pattern[2:])
+            
+        # 直接往下匹配，注意s不空
+        if (len(s) > 0 and (pattern[0] == '.' or pattern[0] == s[0])):
+            return self.match(s[1:], pattern[1:])
+        return False
