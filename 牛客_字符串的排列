@@ -1,0 +1,41 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    def Permutation(self, ss):
+        # write code here
+        # 之前也做过全排列，类似
+        # 这也太。。。答案是要排列的字符串也有字符重复的
+        # 注意列表保护拷贝
+        self.str = []
+        sset = list(set(list(ss)))
+        if len(sset) == 0:
+            return []
+        if len(sset) == 1:
+            return [ss]
+        
+        sset = list(ss)
+        for i in range(len(sset)):
+            s = sset[:]
+            c = [s[i]]
+            s.pop(i)
+            self.arr(c,s)
+        
+        self.ans = []
+        for j in self.str:
+            ans = ''
+            for k in range(len(j)):
+                ans += j[k]
+            self.ans.append(ans)
+        
+        return self.ans
+    
+    def arr(self,s1,s2):
+        if len(s2)<2:
+            new = s1+s2
+            if new not in self.str:
+                return self.str.append(new)
+        for i in range(len(s2)):
+            sright = s2[:]
+            sleft = s1[:]
+            sleft = s1+[sright[i]]
+            sright.pop(i)
+            self.arr(sleft,sright)
