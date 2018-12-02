@@ -1,0 +1,42 @@
+# -*- coding:utf-8 -*-
+class Solution:
+    # matrix类型为二维列表，需要返回列表
+    def __init__(self):
+        self.ans = []
+    def printMatrix(self, matrix):
+        # write code here
+        # 我都无语了。。。这个矩阵不一定是方针- -
+        # 要注意细节，比如行数或者列数为1，又或者为空阵
+        a = len(matrix)  # 
+        if a:
+            b = len(matrix[0])
+        
+        if a == 0 or b == 0:
+            return self.ans
+        if a == 1 or b == 1:
+            for m in range(a):
+                for n in range(b):
+                    self.ans.append(matrix[m][n])
+            return self.ans
+        
+        self.ans += matrix[0][:]
+        
+        if a > 2:
+            for i in range(1,a-1):
+                self.ans.append(matrix[i][-1])
+                
+        last = matrix[a-1][:]
+        last.reverse()
+        self.ans += last
+        
+        if a > 2:
+            for j in range(a-2,0,-1):
+                self.ans.append(matrix[j][0])
+            
+        matrix.pop(0)
+        matrix.pop()
+        if a > 2:
+            for p in range(a-2):
+                matrix[p].pop(0)
+                matrix[p].pop()
+        return self.printMatrix(matrix)
