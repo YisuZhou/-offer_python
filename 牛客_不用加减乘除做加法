@@ -1,3 +1,12 @@
+写一个函数，求两个整数之和，要求在函数体内不得使用+、-、*、/四则运算符号。
+
+两个整数的和，可以看作是 相加但不算进位 + 相加的进位值
+
+第一步：相加各位的值，不算进位，二进制每位相加就相当于各位做异或^操作
+第二步：计算进位的值，相当于各位与&操作，再左移一位
+
+可以一直是这两步产生的值相加，所以循环以上两步，直到第二步的进位值为0，那么第一步产生的值即为这两个整数的和
+
 # -*- coding:utf-8 -*-
 class Solution:
     def Add(self, num1, num2):
@@ -9,8 +18,8 @@ class Solution:
             temp_nor = num1 ^ num2
             temp_and = num1 & num2
             num2 = temp_and << 1
-            num1 = temp_nor & 0xFFFFFFFF  #这步想不到,负数的处理。
-        if num1 & 0x80000000:
+            num1 = temp_nor & 0xFFFFFFFF  #手动把32位以上置0，怕越界
+        if num1 & 0x80000000:  
             return num1-2**32
         else:
             return num1
