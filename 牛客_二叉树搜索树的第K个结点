@@ -1,3 +1,8 @@
+给定一棵二叉搜索树，请找出其中的第k小的结点。
+
+中序遍历即可
+
+
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
