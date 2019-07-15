@@ -1,3 +1,5 @@
+# 一个是全排列。一个是排序。
+
 # -*- coding:utf-8 -*-
 import itertools
 class Solution:
@@ -21,3 +23,7 @@ class Solution:
                 temp += str_list[j[k]]
             total_num.append(int(temp))
         return min(total_num)
+
+
+# 排序
+# https://blog.csdn.net/github_39611196/article/details/89481261
