@@ -33,3 +33,7 @@ class Solution:
         else:
             low_right = n % (10**(i-1))
             return base_a + low_right + 1
+
+# 更清晰地，
+# https://blog.csdn.net/u010005281/article/details/80085255
+# https://blog.csdn.net/yi_Afly/article/details/52012593
