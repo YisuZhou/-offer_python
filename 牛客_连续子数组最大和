@@ -19,3 +19,6 @@ class Solution:
             return max(array)
         if flag:
             return sum_p
+
+# 还有
+# https://blog.csdn.net/m0_37925202/article/details/80816684
