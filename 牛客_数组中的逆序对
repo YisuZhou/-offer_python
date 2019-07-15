@@ -1,3 +1,4 @@
+# https://blog.csdn.net/u010005281/article/details/80099333
 # -*- coding:utf-8 -*-
 class Solution:
     def InversePairs(self, data):
